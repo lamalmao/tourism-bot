@@ -1,0 +1,11 @@
+node_modules
+temp
+dist
+logs
+.vscode
+
+session*.*
+errors*.*
+*.log
+settings*.json
+!*-template.*

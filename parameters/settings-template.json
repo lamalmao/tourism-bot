@@ -1,0 +1,9 @@
+{
+  "bot": {
+    "key": "https://t.me/BotFather"
+  },
+  "db": "mongodb://<username>:<password>@host/base",
+  "yandex": {
+    "geocoder": "geo_api_key"
+  }
+}

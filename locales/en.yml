@@ -1,0 +1,21 @@
+error: |
+  Something went wrong, try again
+  <pre>{{{error}}}</pre>
+greeting: Welcome <b>{{{username}}}</b>!
+menu:
+  text: Главное меню
+  weather: Погода
+  route: Проложить маршрут
+  set-location: Указать местоположение
+  events: События
+  hints: Задать вопрос
+  rent: Снять жилье
+exit: Exit
+set-location:
+  instruction: Отправьте при помощи кнопки ниже свое местоположение
+  location-request: Моя позиция
+  choose-variant: Выберите наиболее точный адрес из предложенных
+  finale: |
+    <b>Данные о вашем местоположении были обновлены</b>
+    <pre>{{{address}}}</pre>
+  not-found: Не получилось определить адрес
