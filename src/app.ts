@@ -20,9 +20,3 @@ import Logger from './logger.js';
     console.error(message);
   }
 })();
-
-// process.on('SIGKILL', async () => {
-//   bot.stop('Exiting');
-//   await mongoose.disconnect();
-//   process.exit(0);
-// });

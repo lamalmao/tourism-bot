@@ -6,9 +6,7 @@ export default class TreeLoader {
   private readonly _treePath: string;
   private _treeObject?: object;
 
-  private static readonly _DefaultPath = path.resolve(
-    './parameters/files-tree.json'
-  );
+  private static readonly _DefaultPath = path.resolve('./files-tree.json');
 
   constructor(treePath: string = TreeLoader._DefaultPath) {
     this._treePath = treePath;

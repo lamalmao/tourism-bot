@@ -70,6 +70,6 @@ class Settings {
   }
 }
 
-const parsedSettings = new Settings('./parameters/settings.json');
+const parsedSettings = new Settings('./settings.json');
 const { settings } = parsedSettings;
 export default settings;
