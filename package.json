@@ -10,7 +10,8 @@
     "lint": "npx eslint --ext .ts .",
     "fix": "npx eslint --fix --ext .ts .",
     "build": "yarn run fix && npx tsc",
-    "dev": "npx ts-node-esm ./src/app.ts"
+    "dev": "npx ts-node-esm ./src/app.ts",
+    "start": "node ./dist/app.js"
   },
   "dependencies": {
     "@types/i18n": "^0.13.6",

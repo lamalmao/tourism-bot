@@ -9,6 +9,9 @@ const set = {
   db: '',
   yandex: {
     geocoder: ''
+  },
+  gpt: {
+    key: ''
   }
 };
 

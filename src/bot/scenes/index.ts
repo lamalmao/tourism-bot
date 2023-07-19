@@ -5,8 +5,26 @@ import deleteMessage from '../actions/delete-message.js';
 import localization from '../localization.js';
 import Logger from '../../logger.js';
 import setLocation from './set-location.js';
+import enterProfile from './profile.js';
+import languagesList from './languages-list.js';
+import setLanguage from './set-language.js';
+import GPTHints from './gpt-hints.js';
 
-const stage = new Scenes.Stage<Bot>([enterMenu, setLocation]);
+const stage = new Scenes.Stage<Bot>([
+  enterMenu,
+  setLocation,
+  enterProfile,
+  languagesList,
+  setLanguage,
+  GPTHints
+]);
+
+stage.start((ctx, next) => {
+  ctx.scene.leave();
+  next();
+});
+
+stage.action('close', deleteMessage, ctx => ctx.scene.leave());
 
 stage.hears(localization.__l('exit'), deleteMessage, async ctx => {
   try {

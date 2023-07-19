@@ -24,21 +24,7 @@ enterMenu.enterHandler = async ctx => {
           [
             localization.__({
               locale: language,
-              phrase: 'menu.weather'
-            }),
-            localization.__({
-              locale: language,
-              phrase: 'menu.route'
-            }),
-            localization.__({
-              locale: language,
-              phrase: 'menu.set-location'
-            })
-          ],
-          [
-            localization.__({
-              locale: language,
-              phrase: 'menu.events'
+              phrase: 'menu.profile'
             }),
             localization.__({
               locale: language,
@@ -49,16 +35,34 @@ enterMenu.enterHandler = async ctx => {
             localization.__({
               locale: language,
               phrase: 'menu.rent'
+            }),
+            localization.__({
+              locale: language,
+              phrase: 'menu.route'
+            }),
+            localization.__({
+              locale: language,
+              phrase: 'menu.weather'
+            })
+          ],
+          [
+            localization.__({
+              locale: language,
+              phrase: 'menu.help'
+            }),
+            localization.__({
+              locale: language,
+              phrase: 'menu.about'
             })
           ]
-        ]).resize(true).reply_markup
+        ]).resize(true).reply_markup,
+        parse_mode: 'HTML'
       }
     );
 
     ctx.session.menu = menu.message_id;
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.log((error as Error).stack);
     Logger.error(errorMessage);
     replyWithError(ctx, errorMessage);
   } finally {

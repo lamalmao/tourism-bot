@@ -4,8 +4,20 @@ import type { Bot } from '../index.js';
 import Logger from '../../logger.js';
 import replyWithError from '../actions/reply-with-error.js';
 import localization from '../localization.js';
-import User, { MAPS_ALLOWED_USER_LANGUAGES } from '../../models/user.js';
-import getLocationData from '../../tools/reverse-geocoder.js';
+import User, {
+  MAPS_ALLOWED_USER_LANGUAGES,
+  USER_LANGUAGES
+} from '../../models/user.js';
+import getLocationDataByCoords from '../../tools/reverse-geocoder.js';
+import getLocationDataByAddress from '../../tools/geocoder.js';
+
+const getAllowedMapLanguage = (language: string) => {
+  return Object.keys(MAPS_ALLOWED_USER_LANGUAGES).includes(language)
+    ? MAPS_ALLOWED_USER_LANGUAGES[
+        language as keyof typeof MAPS_ALLOWED_USER_LANGUAGES
+      ]
+    : MAPS_ALLOWED_USER_LANGUAGES.ru;
+};
 
 const setLocation = new Scenes.BaseScene<Bot>('set-location');
 
@@ -64,13 +76,9 @@ setLocation.on(message('location'), async ctx => {
     const language = ctx.session.userInstance.language;
 
     const location = ctx.message.location;
-    const recognizedLocations = await getLocationData(
+    const recognizedLocations = await getLocationDataByCoords(
       [location.longitude, location.latitude],
-      Object.keys(MAPS_ALLOWED_USER_LANGUAGES).includes(language)
-        ? MAPS_ALLOWED_USER_LANGUAGES[
-            language as keyof typeof MAPS_ALLOWED_USER_LANGUAGES
-          ]
-        : MAPS_ALLOWED_USER_LANGUAGES.ru
+      getAllowedMapLanguage(language)
     );
 
     if (!recognizedLocations) {
@@ -173,6 +181,72 @@ setLocation.action(/location:\d+/, async ctx => {
     replyWithError(ctx, errorMessage);
   } finally {
     ctx.scene.enter('menu');
+  }
+});
+
+setLocation.on(message('text'), async ctx => {
+  try {
+    if (!ctx.session.userInstance) {
+      throw new Error('User not found');
+    }
+
+    const { language } = ctx.session.userInstance;
+
+    const address = ctx.message.text;
+    const coordinates = await getLocationDataByAddress(
+      address,
+      getAllowedMapLanguage(language)
+    );
+
+    if (!coordinates) {
+      throw new Error('Location not found');
+    }
+
+    await User.updateOne(
+      {
+        telegramId: ctx.from.id
+      },
+      {
+        $set: {
+          location: {
+            coordinates,
+            title: address
+          }
+        }
+      }
+    );
+
+    await ctx.reply(
+      localization.__({
+        locale: language,
+        phrase: 'set-location.found'
+      }),
+      {
+        parse_mode: 'HTML'
+      }
+    );
+    await ctx.replyWithLocation(coordinates[1], coordinates[0], {
+      horizontal_accuracy: 10
+    });
+
+    ctx.scene.enter('menu');
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    Logger.error(errorMessage);
+
+    if (errorMessage === 'Location not found') {
+      replyWithError(
+        ctx,
+        localization.__({
+          locale: ctx.session.userInstance
+            ? ctx.session.userInstance.language
+            : USER_LANGUAGES.en,
+          phrase: 'set-location.not-found'
+        })
+      );
+    } else {
+      replyWithError(ctx, errorMessage);
+    }
   }
 });
 

@@ -36,7 +36,9 @@ export default class TreeLoader {
     const currentFolder = path.resolve(parent, item as string);
 
     try {
-      fs.mkdirSync(currentFolder);
+      if (!fs.existsSync(currentFolder)) {
+        fs.mkdirSync(currentFolder);
+      }
     } catch (error) {
       Logger.error((error as Error).message);
     }

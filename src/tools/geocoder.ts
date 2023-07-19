@@ -5,23 +5,18 @@ import settings from '../settings.js';
 const APIUrl = 'https://geocode-maps.yandex.ru/1.x/';
 const apikey = settings.yandex.geocoder;
 
-async function getLocationDataByCoords(
-  coordinates: [number, number],
+async function getLocationDataByAddress(
+  address: string,
   language = 'ru'
-): Promise<Array<string> | undefined> {
+): Promise<[number, number] | undefined> {
   try {
     const response = await axios.get<{
       response?: {
         GeoObjectCollection: {
           featureMember: Array<{
             GeoObject: {
-              metaDataProperty: {
-                GeocoderMetaData: {
-                  text: string;
-                  Address: {
-                    formatted: string;
-                  };
-                };
+              Point: {
+                pos: string;
               };
             };
           }>;
@@ -33,7 +28,7 @@ async function getLocationDataByCoords(
     }>(APIUrl, {
       params: {
         apikey,
-        geocode: coordinates.join(','),
+        geocode: address,
         format: 'json',
         lang: language,
         results: 3
@@ -47,20 +42,17 @@ async function getLocationDataByCoords(
     }
 
     if (data.response) {
-      const result: Array<string> = [];
-      for (const location of data.response.GeoObjectCollection.featureMember) {
-        result.push(
-          location.GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted
-        );
+      const location = data.response.GeoObjectCollection.featureMember[0];
+      if (!location) {
+        throw new Error('Location not found');
       }
 
-      if (result.length !== 0) {
-        return result;
-      }
+      const coordinates = location.GeoObject.Point.pos.split(' ');
+      return [Number(coordinates[0]), Number(coordinates[1])];
     }
   } catch (error) {
     Logger.error((error as Error).message);
   }
 }
 
-export default getLocationDataByCoords;
+export default getLocationDataByAddress;

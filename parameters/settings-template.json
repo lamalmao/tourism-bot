@@ -5,5 +5,8 @@
   "db": "mongodb://<username>:<password>@host/base",
   "yandex": {
     "geocoder": "geo_api_key"
+  },
+  "gpt": {
+    "key": "gpt_api_key"
   }
 }

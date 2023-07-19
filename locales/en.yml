@@ -1,21 +1,99 @@
 error: |
   Something went wrong, try again
   <pre>{{{error}}}</pre>
-greeting: Welcome <b>{{{username}}}</b>!
+greeting: >
+  <b>{{{username}}}</b>, Welcome to the Crimea Tourist Bot! 🌴🌊
+
+  It will help you create the perfect itinerary, suggest the best places and events, and provide weather updates. ☀️⛅️❄️
+
+  Travel around Crimea with comfort and enjoy an unforgettable vacation! ✨🌅
 menu:
-  text: Главное меню
-  weather: Погода
-  route: Проложить маршрут
-  set-location: Указать местоположение
-  events: События
-  hints: Задать вопрос
-  rent: Снять жилье
-exit: Exit
+  text: |
+    <b>Welcome to the bot control menu!</b>
+    Available commands can be found below ⬇️
+  weather: ☀️ Weather
+  route: 🗺️ Build route
+  profile: ⚙️ Profile
+  events: 📅 List of events
+  hints: 💡 Get advice
+  rent: 🏠 Where to stay overnight
+  help: 🆘 Help
+  about: 🔎 About bot
+exit: ❌ Close
+about: |
+  <b>🤖 Introducing our unique tourist bot for traveling in Crimea!</b>
+
+  <i>🗺️ It can help you plan routes, book accommodation, provide weather forecasts, and offer travel advice.</i>
+
+  <b>🚀 Routes:</b> The bot will suggest optimal routes, taking into account your preferences and interests.
+
+  <b>🏨 Accommodation booking:</b> It will find the perfect accommodation that meets your preferences in terms of price, comfort, and location.
+
+  <b>🌦️ Weather forecast:</b> The bot will provide you with accurate weather information, helping you choose suitable clothing and equipment.
+
+  <b>💡 Travel advice:</b> Our advisory bot will tell you about the best places, restaurants, and excursions in Crimea.
+
+  <b>📅 Events:</b> It will keep you informed about upcoming cultural events, festivals, and concerts.
+
+  <u>✨ Our tourist bot is your reliable guide in Crimea, helping you create unforgettable experiences!</u>
+
+  <b>🌄🌊 Make use of its features and have a perfect time in Crimea!</b>
 set-location:
-  instruction: Отправьте при помощи кнопки ниже свое местоположение
-  location-request: Моя позиция
-  choose-variant: Выберите наиболее точный адрес из предложенных
+  instruction: |
+    Send your location using the button below 🔎
+    <i>Or write your address manually</i> ⌨
+  location-request: My position
+  choose-variant: Select the most accurate address from the following
   finale: |
-    <b>Данные о вашем местоположении были обновлены</b>
+    <b>Your location data has been updated</b>
     <pre>{{{address}}}</pre>
-  not-found: Не получилось определить адрес
+  not-found: ❌ Couldn't get an address
+  found: ✔ Found you, your location data has been successfully updated
+profile:
+  text: Hello <b>{{{username}}}</b>, what do you want to do?
+  buttons:
+    set-location: 🖈 Specify location
+    language: 🌍 Change language
+    booking: 🏷️ Your reservation
+set-language:
+  languages:
+    ru: Russian/Русский
+    ua: Ukrainian/Українська
+    tt: Tatar/Татар
+    en: English
+    cn: Chinese/中國人
+    ar: عربي/Arabic
+  text: |
+    Выберите ваш язык
+    <i>Choose your language</i>
+gpt-hints:
+  text: |
+    🔍 Здесь вы можете получить индивидуальные ответы на ваши вопросы, а также полезную информацию и советы о туристических местах, событиях и погоде в Крыму.
+
+    🗺️ Ниже приведены примеры вопросов, на которые я с радостью помогу вам ответить:
+
+    <b>"Куда поехать летом в Крым?"</b>
+    <i>В Крыму множество прекрасных мест для летнего отдыха! Рекомендую посетить пляжи Южного берега, такие как Коктебель, Судак и Феодосия. Также стоит посмотреть на Крымские горы и съездить в Ялту, Алупку и Севастополь.</i>
+
+    <b>"Что взять с собой в горы Крыма?"</b>
+    <i>Путешествуя в горы Крыма, не забудьте взять удобную обувь для походов, легкую одежду, головной убор, солнцезащитный крем, средства от комаров и крем для губ. Полезно также взять с собой фотоаппарат, чтобы запечатлеть красоту горных пейзажей.</i>
+
+    <b>"Какая погода в Крыму в сентябре?"</b>
+    <i>В сентябре в Крыму обычно стабильно тепло, средняя температура составляет около 25°C. Однако, рекомендуется проверить прогноз погоды перед поездкой, так как могут быть небольшие отклонения.</i>
+
+    ✨ Задавайте свои вопросы о туризме в Крыму, и я с радостью помогу вам получить нужную информацию и личные рекомендации!
+  check-preamble: |
+    Если текст ниже относится к туризму в Крыму и не содержит политических вопросов, вопросов связанных с программированием и не имеет отношения к другим местам кроме Крыма, то ответь просто "проходи" в ином случае "стой"
+
+    {{{question}}}
+  question-preamble: |
+    Ответь на вопрос ниже в контексте крыма:
+
+    {{{question}}}
+  waiting: |
+    ⌨ Отвечаю на ваш вопрос...
+
+    <i>Скоро вы получите ответ, это может занять некоторое время</i>
+  wait: Подождите, скоро вы получите ответ на свой вопрос
+  bad-request: ❌ Вопрос некорректный или не имеет отношения к теме
+  can-answer: проходи
