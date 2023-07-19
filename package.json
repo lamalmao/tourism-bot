@@ -13,6 +13,9 @@
     "dev": "npx ts-node-esm ./src/app.ts",
     "start": "node ./dist/app.js"
   },
+  "engines": {
+    "node": ">=18 <19"
+  },
   "dependencies": {
     "@types/i18n": "^0.13.6",
     "@types/node": "^20.4.2",
