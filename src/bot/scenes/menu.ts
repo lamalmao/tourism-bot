@@ -38,11 +38,17 @@ enterMenu.enterHandler = async ctx => {
             }),
             localization.__({
               locale: language,
+              phrase: 'menu.weather'
+            })
+          ],
+          [
+            localization.__({
+              locale: language,
               phrase: 'menu.route'
             }),
             localization.__({
               locale: language,
-              phrase: 'menu.weather'
+              phrase: 'menu.events'
             })
           ],
           [

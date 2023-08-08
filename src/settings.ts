@@ -12,6 +12,10 @@ const set = {
   },
   gpt: {
     key: ''
+  },
+  b2b: {
+    id: '',
+    key: ''
   }
 };
 

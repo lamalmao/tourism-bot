@@ -9,6 +9,7 @@ import getUser from './actions/get-user.js';
 import replyWithError from './actions/reply-with-error.js';
 import stage from './scenes/index.js';
 import localization from './localization.js';
+import type { GuestData, HotelData } from '../hotels/entities.js';
 
 export interface BotSession
   extends Scenes.SceneSession<Scenes.SceneSessionData> {
@@ -21,6 +22,26 @@ export interface BotSession
   GPTHints?: {
     working: boolean;
     menu: number;
+  };
+  hotelSearch?: {
+    coordinates?: [number, number];
+    type?: number;
+    guests?: Array<GuestData>;
+    guestsWaiting: boolean;
+    dateWaiting: boolean;
+    checkInDate?: string;
+    checkOutDate?: string;
+  };
+  hotelsList?: {
+    foundHotels: Array<{
+      id: string;
+      rates: Array<{
+        daily_prices: Array<string>;
+      }>;
+    }>;
+    hotels: Array<HotelData>;
+    page: number;
+    chosen?: number;
   };
 }
 
@@ -113,5 +134,9 @@ bot.hears(localization.__l('menu.about'), getUser(), async ctx => {
     replyWithError(ctx, errorMessage);
   }
 });
+
+bot.hears(localization.__l('menu.rent'), getUser(), ctx =>
+  ctx.scene.enter('search-hotel')
+);
 
 export default bot;

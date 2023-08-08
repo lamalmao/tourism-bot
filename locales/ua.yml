@@ -118,3 +118,69 @@ gpt-hints:
   wait: Подождите, скоро вы получите ответ на свой вопрос
   bad-request: ❌ Вопрос некорректный или не имеет отношения к теме
   can-answer: проходи
+hotels:
+  cities:
+    sevastopol: Sevastopol
+    bakhchisaray: Bakhchisarai
+    simferopol: Simferopol
+    kerch: Kerch
+  types:
+    Resort: Resort
+    Sanatorium: Sanatorium
+    Guesthouse: Guesthouse
+    Mini-hotel: Mini-hotel
+    Hotel: Hotel
+    Boutique_and_Design: Boutique and Design
+    Apartment: Apartment
+    Cottages_and_Houses: Cottages and Houses
+    Farm: Farm
+    Villas_and_Bungalows: Villas and Bungalows
+    Camping: Camping
+    Hostel: Hostel
+    Apart-hotel: Apart-hotel
+    Glamping: Glamping
+  search:
+    choose-region: Choose a city (the list is not yet complete)
+    choose-type: Choose the type of accommodation
+    choose-hotel: Text me the number of the hotel you are interested in to find out more information
+    searching: Ищу подходящие места...
+    short-data: |
+      <b>{{{number}}}. <u>{{{name}}}</u></b>
+      <i>{{{address}}}</i>
+
+      {{{description}}}
+
+      <i>Цена: {{{price}}}</i>
+    full-data: |
+      <b><u>{{{name}}}</u></b>
+      <i>{{{address}}}</i>
+
+      {{{description}}}
+
+      <u><b>Полезная информация:</b></u>
+      Этажей: {{{floorsNumber}}}
+      Комнат: {{{roomsNumber}}}
+      Год постройки {{{buildYear}}}
+      Типы розеток: {{{sockets}}}
+
+      <u><b>Удобства:</b></u>
+      {{{amenities}}}
+
+      <u><b>Комнаты:</b></u>
+      {{{rooms}}}
+
+      <u><b>Информация для заселения:</b></u>
+      Номер: <code>{{{phone}}}</code>
+      Почта: <code>{{{mail}}}</code>
+
+      <i>Заезд: <b>{{{checkIn}}}</b></i>
+      <i>Выезд: <b>{{{checkOut}}}</b></i>
+  errors:
+    guests-amount: Укажите число больше 0
+    date-form: Текст не соответствует форме
+    date-order: Дата заезда не должна быть больше или равна дате выезда
+    date-shift: Дата заезда не может быть сегодняшним числом (временно)
+    date-error: Ошибка в написании даты
+    nothing-found: Ничего не было найдено
+    specify-number: Укажите номер отеля в списке
+    hotel-not-found: Указанный отель не найден

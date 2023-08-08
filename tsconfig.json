@@ -13,7 +13,8 @@
     "noImplicitAny": false,
     "alwaysStrict": true,
     "noUnusedLocals": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
   "ts-node": {
     "transpileOnly": true,

@@ -9,6 +9,8 @@ import enterProfile from './profile.js';
 import languagesList from './languages-list.js';
 import setLanguage from './set-language.js';
 import GPTHints from './gpt-hints.js';
+import searchHotel from './search-hotel.js';
+import hotelsList from './hotels-list.js';
 
 const stage = new Scenes.Stage<Bot>([
   enterMenu,
@@ -16,7 +18,9 @@ const stage = new Scenes.Stage<Bot>([
   enterProfile,
   languagesList,
   setLanguage,
-  GPTHints
+  GPTHints,
+  searchHotel,
+  hotelsList
 ]);
 
 stage.start((ctx, next) => {
